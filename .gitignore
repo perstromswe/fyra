@@ -1,0 +1,9 @@
+node_modules
+.tmp
+.sass-cache
+client/app/bower_components
+client/dist
+backend/uploads
+.DS_Store
+.idea
+backend/express.log

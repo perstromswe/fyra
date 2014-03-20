@@ -32,15 +32,21 @@ exports.notFound = function (req, res) {
 
 /**Project calls**/
 /*
- GET /api/projects/ HTTP/1.1
+ GET /api/project/ HTTP/1.1
  */
 exports.allProjects = function (inputs, callback) {
-  var query = knex('project').select();
+  var query = knex('project')
+    .join('city', 'project.prj_city', '=', 'city.ci_id')
+    .join('discipline', 'project.prj_discipline', '=', 'discipline.di_id')
+    .join('level', 'project.prj_level', '=', 'level.le_id')
+    .join('type', 'project.prj_type', '=', 'type.ty_id')
+    .select();
+
   query.exec(function (err, results) {
     if (err) {
       sendResponse(callback, err, 404);
-      // return console.error('error running query', err);
+      return console.error('error running query', err);
     }
     sendResponse(callback, results);
   });
-}
+};

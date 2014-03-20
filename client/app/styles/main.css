@@ -1,0 +1,15 @@
+/* Space out content a bit */
+body {
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+	height:100%;
+}
+
+.left-bar{
+	display:static;
+}
+
+.right-bar{
+	display:static;
+}

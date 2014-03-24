@@ -23,6 +23,21 @@ describe('MainCtrl', function() {
   it('should have a list with cities', function(){
     expect($scope.cities[0].activated).toEqual(true);
   });
+
+  it('should have a list with disciplines', function () {
+    expect($scope.disciplines[0].activated).toEqual(true);
+  });
+
+  it('should have a list with levels', function () {
+    expect($scope.levels[0].activated).toEqual(true);
+  });
+
+
+  it('should have a list with types', function () {
+    expect($scope.types[0].activated).toEqual(true);
+  });
+
+
 });
 
 

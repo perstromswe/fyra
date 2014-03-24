@@ -50,3 +50,33 @@ exports.allProjects = function (inputs, callback) {
     sendResponse(callback, results);
   });
 };
+
+/*
+ POST /api/project HTTP/1.1
+ */
+exports.addProject = function (inputs, callback) {
+  var query = knex('project')
+    .insert({
+      prj_number: inputs.body.prj_number,
+      prj_title: inputs.body.prj_title,
+      prj_year: inputs.body.prj_year,
+      prj_leader: inputs.body.prj_leader,
+      prj_type: inputs.body.prj_type.id,
+      prj_city: inputs.body.prj_city.id,
+      prj_discipline: inputs.body.prj_discipline.id,
+      prj_level: inputs.body.prj_level.id,
+      prj_area: inputs.body.prj_area,
+      prj_price_offer: inputs.body.prj_price_offer,
+      prj_price_final: inputs.body.prj_price_final
+    });
+
+  query.exec(function (err, results) {
+    if (err) {
+      sendResponse(callback, err, 404);
+      return console.error('error running query', err);
+    }
+    sendResponse(callback, results);
+  });
+
+};
+

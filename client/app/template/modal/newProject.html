@@ -1,0 +1,105 @@
+<div class="modal-header">
+  <h3>Ansök om ny komponent</h3>
+</div>
+
+<div class="modal-body">
+  <form class="form-horizontal" name="form" ng-submit="submit()">
+    <div class="form-group">
+      <label for="title" class="col-sm-3">Namn på uppdrag</label>
+
+      <div class="col-sm-9">
+        <input type="text" name="prj_title" ng-model="project.prj_title" class="form-control" id="title"
+               placeholder="Ex: Kv. Skatan">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="number" class="col-sm-3">Uppdragsnummer</label>
+
+      <div class="col-sm-9">
+        <input required type="text" type="number" name="prj_number" ng-model="project.prj_number" class="form-control"
+               id="number" placeholder="Ex: Kv. 4030000">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="year" class="col-sm-3">År</label>
+
+      <div class="col-sm-9">
+        <input type="text" name="prj_year" ng-model="project.prj_year" class="form-control" id="year"
+               placeholder="Ex: Kv. 2010">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="leader" class="col-sm-3">Uppdragsledare</label>
+
+      <div class="col-sm-9">
+        <input type="text" name="prj_leader" ng-model="project.prj_leader" class="form-control" id="leader"
+               placeholder="Ex: Calle Svensson">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type" class="col-sm-3">Typ av uppdrag</label>
+
+      <div class="col-sm-9">
+        <select id="type" class="form-control" ng-model="project.prj_type" ng-options="t.title for t in types"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="city" class="col-sm-3">Stad</label>
+
+      <div class="col-sm-9">
+        <select id="city" class="form-control" ng-model="project.prj_city"
+                ng-options="c.title for c in cities"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="discipline" class="col-sm-3">Discipline</label>
+
+      <div class="col-sm-9">
+        <select id="discipline" class="form-control" name="prj_discipline" ng-model="project.prj_discipline"
+                ng-options="d.title for d in disciplines"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="level" class="col-sm-3">Skede</label>
+
+      <div class="col-sm-9">
+        <select id="level" class="form-control" ng-model="project.prj_level"
+                ng-options="l.title for l in levels"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="level" class="col-sm-3">Area</label>
+
+      <div class="col-sm-9">
+        <input type="text" type="number" min="10" name="prj_area" ng-model="project.prj_area" class="form-control"
+               id="area" placeholder="Ex: 1">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="priceOffer" class="col-sm-3">Anbudspris</label>
+
+      <div class="col-sm-9">
+        <input type="number" name="prj_price_offer" ng-model="project.prj_price_offer" class="form-control"
+               id="priceOffer" placeholder="Ex: 1">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="priceFinal" class="col-sm-3">Resultat</label>
+
+      <div class="col-sm-9">
+        <input type="number" name="prj_price_final" ng-model="project.prj_price_final" class="form-control"
+               id="priceFinal" placeholder="Ex: 1">
+        <span ng-show="form.size.$error.integer">This is not valid integer!</span>
+      </div>
+    </div>
+    <input type="submit" class="btn btn-block btn-success btn-lg" value="Lägg till"
+           ng-disabled="!project.prj_title || !project.prj_number || !project.prj_year || !project.prj_leader || !project.prj_area || !project.prj_price_offer || !project.prj_price_final">
+    <br>
+    <alert ng-show="requested" type="alert.type">{{alert.msg}}</alert>
+    <alert ng-show="requestedFail" type="alertFail.type">{{alertFail.msg}}</alert>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="cancel()">Stäng</button>
+</div>
+

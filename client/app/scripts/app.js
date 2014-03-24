@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('clientApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ui.router',
-  'clientApp.services',
-  'filters'
-])
-  .config(function($stateProvider, $urlRouterProvider) {
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ui.router',
+    'clientApp.services',
+    'filters',
+    'ui.bootstrap'
+  ])
+  .config(function ($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise('/');
@@ -18,8 +19,8 @@ angular.module('clientApp', [
       .state('home', {
         url: '/',
         templateUrl: 'views/home.html',
-        resolve:{
-          projects: ['MultiProjectsLoader', function(MultiProjectsLoader){
+        resolve: {
+          projects: ['MultiProjectsLoader', function (MultiProjectsLoader) {
             return new MultiProjectsLoader();
           }]
         },

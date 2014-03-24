@@ -8,17 +8,29 @@
 angular.module('clientApp.services', ['ngResource'])
   .factory('Common', function () {
     var Common = {
-      addActivatedKeyToCities: function (cities) {
-        var citiesWithActivateKey = [];
-        for (var i = 0; i < cities.length; i++) {
-          citiesWithActivateKey.push(
+      combineArrays: function (arrayWithTitles, arrayWithIds) {
+        var length = arrayWithTitles.length,
+          combinedArray = [];
+        for (var i = 0; i < length; i++) {
+          combinedArray.push({
+            title: arrayWithTitles[i],
+            id: arrayWithIds[i],
+            activated: true
+          });
+        }
+        return combinedArray;
+      },
+      addActivatedKey: function (array) {
+        var arrayWithKey = [];
+        for (var i = 0; i < array.length; i++) {
+          arrayWithKey.push(
             {
-              title: cities[i],
+              title: array[i],
               activated: true
             }
           );
         }
-        return citiesWithActivateKey;
+        return arrayWithKey;
       },
       calculatePricesInProjects: function (projects) {
         var projectsWithPrice = [];

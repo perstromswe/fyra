@@ -28,6 +28,7 @@ process.on('uncaughtException', function (error) {
 
 function routesSetup(server) {
   server.get('/api/project', api.allProjects);
+  server.post('/api/project', api.addProject);
   server.get('*', api.notFound);
 }
 

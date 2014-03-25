@@ -55,6 +55,7 @@ exports.allProjects = function (inputs, callback) {
  POST /api/project HTTP/1.1
  */
 exports.addProject = function (inputs, callback) {
+  console.log(inputs.body);
   var query = knex('project')
     .insert({
       prj_number: inputs.body.prj_number,

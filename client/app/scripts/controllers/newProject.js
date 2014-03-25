@@ -18,7 +18,7 @@ angular.module('clientApp')
     $scope.levels = levels;
     $scope.level = $scope.levels[0];
 
-    $scope.types = levels;
+    $scope.types = types;
     $scope.type = $scope.types[0];
 
     $scope.project = {
@@ -40,10 +40,11 @@ angular.module('clientApp')
     };
 
     $scope.submit = function () {
+
       $http({
         method: 'POST',
         url: '/api/project',
-        data: $.param($scope.project),  // pass in data as strings
+        data: $.param($scope.project),
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
       })
         .success(function (data, status) {
@@ -74,5 +75,7 @@ angular.module('clientApp')
           $scope.requestedFail = true;
           $scope.alertFail.msg = 'Något gick fel! Projektet blev ej inlagt. Felmeddelande: ' + data.clientError.message;
         });
+
     };
+
   });

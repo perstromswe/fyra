@@ -14,6 +14,24 @@ beforeEach(function () {
   });
 });
 
+var discipline = {
+  title: 'Markvärme',
+  input: [
+    {
+      title: 'Antal m2',
+      qty: integer,
+      controll: 'slider'
+    },
+    {
+      title: 'Effet per m2',
+      qty: integer
+    }
+  ],
+  calc: this.input[0].qty * this.input[1].qty,
+  criteria: '< 0 outdoortemp',
+  source: 'coal'
+}
+
 describe('Unit Testing: Filters - ', function () {
   var matchProjects;
   var cities = [

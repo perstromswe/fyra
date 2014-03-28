@@ -8,6 +8,7 @@
 angular.module('clientApp.services', ['ngResource'])
   .factory('Common', function () {
     var Common = {
+      storeProductWhileEdit: '',
       combineArrays: function (arrayWithTitles, arrayWithIds) {
         var length = arrayWithTitles.length,
           combinedArray = [];
@@ -57,7 +58,7 @@ angular.module('clientApp.services', ['ngResource'])
     return Common;
   })
   .factory('Project', function ($resource) {
-    return $resource('/api/project/:prj_id', {'prj_id': '@prj_id'});
+    return $resource('/fyra/api/project/:prj_id', {'prj_id': '@prj_id'});
   })
   .factory('MultiProjectsLoader', ['Project', '$q', '$stateParams',
     function (Projects, $q) {

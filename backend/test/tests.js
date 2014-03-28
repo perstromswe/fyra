@@ -33,7 +33,7 @@ describe('Routing -->', function () {
 
   describe('Project', function () {
     it('should return 200 OK on GET /api/project/', function (done) {
-      request(url).get('/api/project').end(function (err, res) {
+      request(url).get('/fyra/api/project').end(function (err, res) {
         should.not.exist(err);
         res.should.have.status('200');
         done();

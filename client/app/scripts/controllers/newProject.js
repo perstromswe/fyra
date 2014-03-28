@@ -43,7 +43,7 @@ angular.module('clientApp')
 
       $http({
         method: 'POST',
-        url: '/api/project',
+        url: '/fyra/api/project',
         data: $.param($scope.project),
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
       })

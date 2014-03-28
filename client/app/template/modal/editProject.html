@@ -1,0 +1,92 @@
+<div class="modal-header">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="pull-left">{{project.prj_number}}:{{project.prj_title}}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="modal-body">
+  <br>
+  <br>
+
+  <form class="form-horizontal" role="form">
+    <div class="form-group" ng-show="editMode.levelOne">
+      <label for="newchangedby" class="col-sm-4 control-label">Ange din signatur</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="newchangedby" ng-model="project.prj_changed_by">
+        <hr>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="changedby" class="col-sm-4 control-label">Senast ändrad av:</label>
+
+      <div class="col-sm-8">
+        <p class="control-label pull-left" id="changedby">{{project.prj_changed_by}}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="titleProject" class="col-sm-4 control-label">Namn på uppdrag</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="titleProject" ng-disabled="!editMode.saveApproved"
+               ng-model="project.prj_title" placeholder="Ex. Kv. Skatan">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="number" class="col-sm-4 control-label">Uppdragsnummer</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="number" ng-disabled="!editMode.saveApproved"
+               ng-model="project.prj_number">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="leader" class="col-sm-4 control-label">Uppdragsledare</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="leader" ng-disabled="!editMode.saveApproved"
+               ng-model="project.prj_leader">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="type" class="col-sm-4 control-label">Typ av uppdrag</label>
+
+      <div class="col-sm-8">
+        <select id="type" class="form-control" ng-model="type" ng-change="changeType(type)"
+                ng-options="t.title for t in types"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="level" class="col-sm-4 control-label">Nivå</label>
+
+      <div class="col-sm-8">
+        <select id="level" class="form-control" ng-model="level" ng-change="changeLevel(level)"
+                ng-options="l.title for l in levels"></select>
+      </div>
+    </div>
+
+    <alert ng-show="requested" type="alert.type">{{alert.msg}}</alert>
+    <alert ng-show="requestedFail" type="alertFail.type">{{alertFail.msg}}</alert>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-success" ng-show="editMode.levelOne" ng-disabled="!editMode.saveApproved"
+          ng-click="save(project.prj_id)">Spara
+  </button>
+  <button class="btn btn-warning" ng-show="editMode.levelOne" ng-disabled="!editMode.levelOne" ng-click="reset()">
+    Återställ
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="startEdit()" ng-disabled="editMode.levelOne"
+          ng-model="editMode.levelOne" btn-checkbox btn-checkbox-true=true btn-checkbox-false=false>
+    Redigera
+  </button>
+  <button class="btn btn-primary" ng-click="cancel()">Stäng</button>
+</div>

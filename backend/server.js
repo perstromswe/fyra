@@ -27,15 +27,16 @@ process.on('uncaughtException', function (error) {
 });
 
 function routesSetup(server) {
-  server.get('/api/project', api.allProjects);
-  server.post('/api/project', api.addProject);
+  server.get('/fyra/api/project', api.allProjects);
+  server.post('/fyra/api/project', api.addProject);
+  server.post('/fyra/api/project/:prj_id', api.updateProject);
   server.get('*', api.notFound);
 }
 
 function start() {
   routesSetup(server);
-  server.listen(3000);
-  console.log('app server up and running on 127.0.0.1:3000');
+  server.listen(3001);
+  console.log('app server up and running on 127.0.0.1:3001');
 }
 
 exports.start = start;

@@ -66,9 +66,9 @@ module.exports = function (grunt) {
       },
       proxies: [
         {
-          context: '/api',
+          context: '/fyra/api',
           host: 'localhost',
-          port: 3000,
+          port: 3001,
           https: false
         }
       ],

@@ -78,6 +78,37 @@ exports.addProject = function (inputs, callback) {
     }
     sendResponse(callback, results);
   });
-
 };
 
+/*
+ UPDATE /api/project/:prj_id
+ */
+//Todo: Unit test is missing
+exports.updateProject = function (inputs, callback) {
+  console.log(inputs.body.prj_type);
+  var query = knex('project')
+    .where({
+      prj_id: inputs.params.prj_id
+    })
+    .update({
+      prj_number: inputs.body.prj_number,
+      prj_title: inputs.body.prj_title,
+      prj_year: inputs.body.prj_year,
+      prj_leader: inputs.body.prj_leader,
+      prj_type: inputs.body.prj_type,
+      //prj_city: inputs.body.prj_city.id,
+      //prj_discipline: inputs.body.prj_discipline.id,
+      //prj_level: inputs.body.prj_level.id,
+      prj_area: inputs.body.prj_area,
+      prj_price_offer: inputs.body.prj_price_offer,
+      prj_price_final: inputs.body.prj_price_final
+    });
+
+  query.exec(function (err) {
+    if (err) {
+      sendResponse(callback, err, 404);
+      return console.error('error running query', err);
+    }
+    sendResponse(callback);
+  });
+};

@@ -73,7 +73,6 @@
               </li>
             </ul>
           </div>
-
         </div>
       </div>
     </div>
@@ -91,7 +90,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="project in projects | matchProjects:cities:disciplines:levels:types | filter:search">
-          <td>{{project.prj_number}}: {{project.prj_title}}</td>
+          <td ng-click="edit(project.prj_id)">{{project.prj_number}}: {{project.prj_title}}</td>
           <td>{{project.prj_leader}}</td>
           <td>{{project.prj_year}}</td>
           <td>{{project.prj_type}}</td>

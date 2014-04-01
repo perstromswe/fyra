@@ -12,7 +12,8 @@
 
   <form class="form-horizontal" role="form">
     <div class="form-group" ng-show="editMode.levelOne">
-      <label for="newchangedby" class="col-sm-4 control-label">Ange din signatur</label>
+      <label for="newchangedby" class="col-sm-4 control-label"
+             ng-class="{warningFont: !editMode.saveApproved, okFont: editMode.saveApproved}">Ange din signatur</label>
 
       <div class="col-sm-8">
         <input type="text" class="form-control" id="newchangedby" ng-model="project.prj_changed_by">
@@ -23,7 +24,8 @@
       <label for="changedby" class="col-sm-4 control-label">Senast ändrad av:</label>
 
       <div class="col-sm-8">
-        <p class="control-label pull-left" id="changedby">{{project.prj_changed_by}}</p>
+        <p class="control-label pull-left" id="changedby">{{project.prj_changed_by}} {{project.prj_changed_date |
+          date:'yyyy-MM-dd'}}</p>
       </div>
     </div>
 
@@ -46,7 +48,16 @@
     </div>
 
     <div class="form-group">
-      <label for="leader" class="col-sm-4 control-label">Uppdragsledare</label>
+      <label for="year" class="col-sm-4 control-label">År</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="year" ng-disabled="!editMode.saveApproved"
+               ng-model="project.prj_year">
+      </div>
+    </div>
+
+    <div class="form-group">
+    <label for="leader" class="col-sm-4 control-label">Uppdragsledare</label>
 
       <div class="col-sm-8">
         <input type="text" class="form-control" id="leader" ng-disabled="!editMode.saveApproved"
@@ -58,17 +69,66 @@
       <label for="type" class="col-sm-4 control-label">Typ av uppdrag</label>
 
       <div class="col-sm-8">
-        <select id="type" class="form-control" ng-model="type" ng-change="changeType(type)"
+        <select id="type" class="form-control" ng-disabled="!editMode.saveApproved" ng-model="type"
+                ng-change="changeType(type)"
                 ng-options="t.title for t in types"></select>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="level" class="col-sm-4 control-label">Nivå</label>
+      <label for="level" class="col-sm-4 control-label">Stad</label>
 
       <div class="col-sm-8">
-        <select id="level" class="form-control" ng-model="level" ng-change="changeLevel(level)"
+        <select id="city" class="form-control" ng-disabled="!editMode.saveApproved" ng-model="city"
+                ng-change="changeCity(city)"
+                ng-options="c.title for c in cities"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="level" class="col-sm-4 control-label">Discipline</label>
+
+      <div class="col-sm-8">
+        <select id="disciplines" class="form-control" ng-disabled="!editMode.saveApproved" ng-model="discipline"
+                ng-change="changeDiscipline(discipline)"
+                ng-options="d.title for d in disciplines"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="level" class="col-sm-4 control-label">Skede</label>
+
+      <div class="col-sm-8">
+        <select id="level" class="form-control" ng-disabled="!editMode.saveApproved" ng-model="level"
+                ng-change="changeLevel(level)"
                 ng-options="l.title for l in levels"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="area" class="col-sm-4 control-label">Area</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="area" ng-disabled="!editMode.saveApproved"
+               ng-model="project.prj_area">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="offer" class="col-sm-4 control-label">Anbudspris</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="offer" ng-disabled="!editMode.saveApproved"
+               ng-model="project.prj_price_offer">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="final" class="col-sm-4 control-label">Slutpris</label>
+
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="final" ng-disabled="!editMode.saveApproved"
+               ng-model="project.prj_price_final">
       </div>
     </div>
 

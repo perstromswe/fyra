@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('clientApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ui.router',
-    'clientApp.services',
-    'filters',
-    'ui.bootstrap'
-  ])
+  'ngCookies',
+  'ngResource',
+  'ngSanitize',
+  'ui.router',
+  'clientApp.services',
+  'filters',
+  'ui.bootstrap',
+  'ui-rangeSlider'
+])
   .config(function ($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1

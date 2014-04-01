@@ -36,11 +36,11 @@ describe('NewProjectCtrl', function () {
     });
   }));
 
-  it('should return status 200 when posting data', function () {
-    scope.submit();
-    //mockBackend.expectPOST('/api/project', {title: 'test'}).respond({id: 2});
-    //mockBackend.flush();
-  });
+  //it('should return status 200 when posting data', function () {
+  //  scope.submit();
+  //mockBackend.expectPOST('/api/project', {title: 'test'}).respond({id: 2});
+  //mockBackend.flush();
+  //});
 
   /*
 

@@ -21,6 +21,7 @@ module.exports = function (config) {
       'app/bower_components/angular-ui-router/release/angular-ui-router.js',
       'app/bower_components/underscore/underscore.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap.js',
+      'app/bower_components/angular-rangeslider/angular.rangeSlider.js',
       'app/scripts/services/service.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',

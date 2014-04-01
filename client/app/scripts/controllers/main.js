@@ -5,6 +5,18 @@ angular.module('clientApp')
     //var projectsCopy = angular.copy(projects)
     $scope.projects = Common.calculatePricesInProjects(projects);
 
+    /**Get the oldest and newest project and attach it to the slider**/
+    var years = _.pluck(projects, 'prj_year'),
+      oldestYear = _.min(years),
+      newestYear = _.max(years);
+
+    $scope.sliderYears = {
+      min: _.min(years),
+      max: _.max(years),
+      currentMin: oldestYear,
+      currentMax: newestYear
+    };
+
     /**Create an array with title, id and activatedProperty on all cities in projects**/
     var cityTitles = _.uniq(_.pluck(projects, 'ci_title')),
       cityIds = _.uniq(_.pluck(projects, 'ci_id'));
@@ -32,8 +44,18 @@ angular.module('clientApp')
       });
     };
 
+    $scope.setOjectInFilter = function (object, val) {
+      object.activated = val;
+    };
+
+    $scope.search = '';
+
+    $scope.$watch('search', function () {
+      update();
+    });
+
     /**Update the filters when any of the filters changes**/
-    $scope.$watch('disciplinesTitles', function () {
+    $scope.$watch('disciplines', function () {
       update();
     }, true);
 
@@ -49,8 +71,12 @@ angular.module('clientApp')
       update();
     }, true);
 
+    $scope.$watch('sliderYears', function () {
+      update();
+    }, true);
+
     function update() {
-      var projects = $filter('matchProjects')($scope.projects, $scope.cities, $scope.disciplines, $scope.levels, $scope.types);
+      var projects = $filter('matchProjects')($scope.projects, $scope.cities, $scope.disciplines, $scope.levels, $scope.types, $scope.search, $scope.sliderYears.currentMin, $scope.sliderYears.currentMax);
       $scope.nrOfProjectsFiltred = projects.length;
       $scope.averagePrice = Common.calculateAveragePrice(projects);
     }
@@ -102,119 +128,15 @@ angular.module('clientApp')
             return projects;
           }
         },
-        controller: function ($scope, $timeout, $modalInstance, $state, project, projects, disciplines, cities, levels, types, Common) {
-          var initProject = angular.copy(project);
-          //var projects = angular.copy(projects);
-          $scope.project = angular.copy(project);
-
-          Common.storeProductWhileEdit = $scope.project;
-
-          /**Set all drop down values**/
-          $scope.disciplines = disciplines;
-          var disciplineArray = _.where(disciplines, {id: $scope.project.di_id});
-          $scope.discipline = disciplineArray[0];
-
-          $scope.cities = cities;
-          $scope.city = $scope.cities[0];
-
-          $scope.levels = levels;
-          var levelPosition = types.map(function (x) {
-            return x.id;
-          }).indexOf($scope.project.prj_level);
-          $scope.level = types[levelPosition];
-
-          $scope.types = types;
-          var typePosition = types.map(function (x) {
-            return x.id;
-          }).indexOf($scope.project.prj_type);
-          $scope.type = types[typePosition];
-          var initType = angular.copy($scope.type);
-
-          $scope.changeLevel = function (level) {
-            $scope.project.prj_level = level.id
-          };
-
-          $scope.changeType = function (type) {
-            $scope.project.prj_type = type.id;
-          };
-
-          $scope.dropDowns = {
-            type: $scope.type
-          }
-
-          $scope.project = project;
-          $scope.editMode = {
-            active: false,
-            levelOne: false,
-            saveApproved: false
-          };
-
-          $scope.startEdit = function () {
-            $scope.editMode.active = true;
-            $scope.project.prj_changed_by = '';
-            $scope.editMode.saveApproved = false;
-          };
-
-          $scope.$watch('project.prj_changed_by', function () {
-            if ($scope.editMode.active) {
-              if ($scope.project.prj_changed_by.length === 6) {
-                $scope.editMode.saveApproved = true;
-              } else {
-                $scope.editMode.saveApproved = false;
-              }
-            }
-          });
-
-          $scope.reset = function () {
-            $scope.editMode.active = false;
-            $scope.deActivateEdit();
-            $scope.project = angular.copy(initProject);
-            $scope.type = angular.copy(initType);
-          };
-
-          $scope.deActivateEdit = function () {
-            $scope.editMode.levelOne = false;
-            $scope.editMode.levelTwo = false;
-            $scope.editMode.saveApproved = false;
-          };
-
-          $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-          };
-
-          $scope.alert = {
-            type: 'success',
-            msg: 'Uppgifter uppdaterade.'
-          };
-
-          $scope.alertFail = {
-            type: 'danger'
-          };
-
-          $scope.save = function () {
-            $scope.project.$save(function () {
-              /**Notify the user for a few second that the post was successfull**/
-              $scope.requested = true;
-              $scope.deActivateEdit();
-              Common.storeProductWhileEdit = $scope.project;
-              $timeout(function () {
-                $scope.requested = false;
-              }, 3000);
-            }, function (err) {
-              console.log(err);
-              $scope.requestedFail = true;
-              $scope.alertFail.msg = 'Något gick fel! Projektet kunde ej sparas. Felmeddelande: ' + err.clientError.message;
-            });
-          }
-        }
+        controller: 'EditCtrl'
       });
 
-      modalInstance.result.then(function (test) {
+      modalInstance.result.then(function () {
         $state.reload();
       }, function () {
         $state.reload();
 
-        var activeProject = _.where(projects, {prj_id: id});
+        //var activeProject = _.where(projects, {prj_id: id});
         var projectsPosition = projects.map(function (x) {
           return x.prj_id;
         }).indexOf(id);
@@ -223,5 +145,5 @@ angular.module('clientApp')
         $scope.projects = Common.calculatePricesInProjects(projects);
         //$log.info('Modal dismissed at: ' + new Date());
       });
-    }
+    };
   });

@@ -6,10 +6,65 @@ body {
 	height:100%;
 }
 
+table {
+	cursor: pointer;
+}
+
+li {
+	list-style-type: none;
+}
+
 .left-bar{
 	display:static;
 }
 
 .right-bar{
 	display:static;
+}
+
+.okFont {
+	color: #47A447;
+}
+
+.warningFont {
+	color: #D9534F;
+}
+
+.modal.fade .modal-dialog {
+	-webkit-transform: translate(0, -1%);
+	-ms-transform: translate(0, -1%);
+	transform: translate(0, -1%);
+	-webkit-transition: -webkit-transform 0.1s ease-out;
+	-moz-transition: -moz-transform 0.1s ease-out;
+	-o-transition: -o-transform 0.1s ease-out;
+	transition: transform 0.1s ease-out;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	color: #ffffff;
+	cursor: pointer;
+	text-decoration: none;
+	background-color: #428bca;
+}
+
+.brandContainer {
+	padding-left: 43%;
+	width: 50px;
+
+}
+
+.brandText {
+	font-style: italic;
+	font-size: 28px;
+	line-height: 1.5em;
+	color: #777;
+	letter-spacing: 3px;
+}
+
+.help {
+	position: absolute;
+	right: 15px;
+	top: 5px;
+	z-index: 1000;
 }

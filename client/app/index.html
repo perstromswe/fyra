@@ -13,6 +13,8 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
@@ -22,6 +24,8 @@
   <!-- build:css({.tmp,app}) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
+
+
 </head>
 <body ng-app="clientApp">
 <!--[if lt IE 7]>
@@ -29,43 +33,16 @@
   your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="navbar navbar-default navbar-static-top">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Project name</a>
+    <div class="brandContainer">
+      <i class="fa fa-th brandText">fyra</i>
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="../navbar/">Default</a></li>
-        <li class="active"><a href="./">Static top</a></li>
-        <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-      </ul>
-    </div>
-    <!--/.nav-collapse -->
   </div>
+  </div>
+<div class="help">
+  <a class="btn btn-default" href="http://swecopedia/fyra" target="_blank">
+    <i class="fa fa-question fa-1x"></i> Hjälp</a>
 </div>
 
 <!-- Add your site or application content here -->
@@ -96,7 +73,7 @@
 
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -106,6 +83,7 @@
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -113,6 +91,7 @@
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/newProject.js"></script>
+<script src="scripts/controllers/editCtrl.js"></script>
 <script src="scripts/services/service.js"></script>
 <script src="scripts/filters/filter.js"></script>
 <!-- endbuild -->

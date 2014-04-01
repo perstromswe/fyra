@@ -15,7 +15,7 @@ describe('MultiProjectsLoader', function () {
   }));
 
   it('should load list of projects', function () {
-    mockBackend.expectGET('/api/project').respond([
+    mockBackend.expectGET('/fyra/api/project').respond([
       {id: 1},
       {id: 2}
     ]);

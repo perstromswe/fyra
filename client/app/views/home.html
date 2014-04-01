@@ -1,102 +1,171 @@
 <div class="container-fluid">
   <div class="row main-content">
-    <div class="col-sm-6 left-bar">
+    <div class="col-sm-6 col-sm-offset-3">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Panel title</h3>
+          <h3 class="panel-title">Statistik</h3>
         </div>
         <div class="panel-body">
-          <h3>Anbud: {{averagePrice.averageOfferPrice|checkNull}} kr/m2</h3>
-
-          <h3>Resultat: {{averagePrice.averageFinalPrice|checkNull}} kr/m2</h3>
+          <div class="col-sm-6">
+            <h1>Anbud: {{averagePrice.averageOfferPrice|checkNull}} kr/m2</h1>
+          </div>
+          <div class="col-sm-6">
+            <h1>Resultat: {{averagePrice.averageFinalPrice|checkNull}} kr/m2</h1>
+          </div>
         </div>
         <div class="panel-footer">
           <p>Baserat på {{nrOfProjectsFiltred}} uppdrag</p>
         </div>
       </div>
-
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Filter</h3>
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-sm-3">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" ng-click="check('cities', true)">Markera</button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="check('cities', false)">Avmarkera
-                </button>
-              </div>
-              <ul>
-                <li ng-repeat="city in cities">
-                  <input type="checkbox" ng-model="city.activated">
-                  {{city.title}}
-                </li>
-              </ul>
-            </div>
-            <div class="col-sm-3">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" ng-click="check('disciplines', true)">Markera
-                </button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="check('disciplines', false)">Avmarkera
-                </button>
-              </div>
-              <ul>
-                <li ng-repeat="discipline in disciplines">
-                  <input type="checkbox" ng-model="discipline.activated">
-                  {{discipline.title}}
-                </li>
-              </ul>
-            </div>
-            <div class="col-sm-3">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" ng-click="check('types', true)">Markera</button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="check('types', false)">Avmarkera</button>
-              </div>
-              <ul>
-                <li ng-repeat="type in types">
-                  <input type="checkbox" ng-model="type.activated">
-                  {{type.title}}
-                </li>
-              </ul>
+            <div class="col-sm-12">
+              <div range-slider min="sliderYears.min" max="sliderYears.max" model-min="sliderYears.currentMin"
+                   model-max="sliderYears.currentMax"></div>
             </div>
           </div>
-          <div class="col-sm-3">
-            <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm" ng-click="check('levels', true)">Markera</button>
-              <button type="button" class="btn btn-default btn-sm" ng-click="check('levels', false)">Avmarkera</button>
+          <div class="row">
+            <div class="col-sm-3">
+              <div id="cities">
+                <li class="dropdown">
+                  <a class="dropdown-toggle btn btn-default">
+                    Stad <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('cities', true)">
+                      <i class="fa fa-check-square"></i> Markera alla</a>
+                    </li>
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('cities', false)">
+                      <i class="fa fa-square"></i> Avmarkera alla</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="city in cities" ng-click="$event.stopPropagation()">
+                      <a ng-click="setOjectInFilter(city, !city.activated)">{{city.title}}
+                        <i ng-class="{'fa fa-check': city.activated}" class=" pull-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </div>
             </div>
-            <ul>
-              <li ng-repeat="level in levels">
-                <input type="checkbox" ng-model="level.activated">
-                {{level.title}}
-              </li>
-            </ul>
+
+            <div class="col-sm-3">
+              <div id="disciplines">
+                <li class="dropdown">
+                  <a class="dropdown-toggle btn btn-default">
+                    Discipline <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('disciplines', true)">
+                      <i class="fa fa-check-square"></i> Markera alla</a>
+                    </li>
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('disciplines', false)">
+                      <i class="fa fa-square"></i> Avmarkera alla</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="discipline in disciplines" ng-click="$event.stopPropagation()">
+                      <a ng-click="setOjectInFilter(discipline, !discipline.activated)">{{discipline.title}}
+                        <i ng-class="{'fa fa-check': discipline.activated}" class=" pull-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div id="levels">
+                <li class="dropdown">
+                  <a class="dropdown-toggle btn btn-default">
+                    Skede <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('levels', true)">
+                      <i class="fa fa-check-square"></i> Markera alla</a>
+                    </li>
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('levels', false)">
+                      <i class="fa fa-square"></i> Avmarkera alla</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="level in levels" ng-click="$event.stopPropagation()">
+                      <a ng-click="setOjectInFilter(level, !level.activated)">{{level.title}}
+                        <i ng-class="{'fa fa-check': level.activated}" class=" pull-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div id="types">
+                <li class="dropdown">
+                  <a class="dropdown-toggle btn btn-default">
+                    Typ <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('types', true)">
+                      <i class="fa fa-check-square"></i> Markera alla</a>
+                    </li>
+                    <li ng-click="$event.stopPropagation()"><a ng-click="check('types', false)">
+                      <i class="fa fa-square"></i> Avmarkera alla</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="type in types" ng-click="$event.stopPropagation()">
+                      <a ng-click="setOjectInFilter(type, !type.activated)">{{type.title}}
+                        <i ng-class="{'fa fa-check': type.activated}" class=" pull-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" placeholder="Sök" ng-model="search">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Uppdrag</h3>
+        </div>
+        <div class="panel-body">
+          <div class="project-table">
+            <button type="button" class="btn btn-success pull-right" ng-click="newProject()">Lägg till</button>
+            <br>
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Uppdrag</th>
+                <th>Uppdragsledare</th>
+                <th>År</th>
+                <th>Stad</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="project in projects | matchProjects:cities:disciplines:levels:types:search:sliderYears.currentMin:sliderYears.currentMax"
+                  ng-click="edit(project.prj_id)">
+                <td><a>{{project.prj_number}}: {{project.prj_title}}</a></td>
+                <td>{{project.prj_leader}}</td>
+                <td>{{project.ci_title}}</td>
+                <td>{{project.prj_year}}</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-6 project-table">
-      <input type="text" class="form-control" ng-model="search">
-      <button type="button" class="btn btn-success btn pull-right" ng-click="newProject()">Lägg till</button>
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="project in projects | matchProjects:cities:disciplines:levels:types | filter:search">
-          <td ng-click="edit(project.prj_id)">{{project.prj_number}}: {{project.prj_title}}</td>
-          <td>{{project.prj_leader}}</td>
-          <td>{{project.prj_year}}</td>
-          <td>{{project.prj_type}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </div>
+
+

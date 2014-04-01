@@ -14,24 +14,6 @@ beforeEach(function () {
   });
 });
 
-var discipline = {
-  title: 'Markvärme',
-  input: [
-    {
-      title: 'Antal m2',
-      qty: integer,
-      controll: 'slider'
-    },
-    {
-      title: 'Effet per m2',
-      qty: integer
-    }
-  ],
-  calc: this.input[0].qty * this.input[1].qty,
-  criteria: '< 0 outdoortemp',
-  source: 'coal'
-}
-
 describe('Unit Testing: Filters - ', function () {
   var matchProjects;
   var cities = [
@@ -104,6 +86,12 @@ describe('Unit Testing: Filters - ', function () {
       }
     ];
 
+  var searchOne;
+  var searchTwo = '2012';
+
+  var minYear = 2009;
+  var maxYear = 2014;
+
   // load the module
   beforeEach(module('filters'));
 
@@ -119,6 +107,11 @@ describe('Unit Testing: Filters - ', function () {
 
 
   it('should filter two of the projcets', function () {
-    expect(matchProjects(projects, cities, disciplines, levels, types).length).toEqual(2);
+    expect(matchProjects(projects, cities, disciplines, levels, types, searchOne, minYear, maxYear).length).toEqual(2);
+  });
+
+  it('should filter two of the projects', function () {
+    expect(matchProjects(projects, cities, disciplines, levels, types, searchTwo, minYear, maxYear).length).toEqual(1);
+
   });
 });

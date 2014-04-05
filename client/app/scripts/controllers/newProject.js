@@ -7,7 +7,7 @@
 
 
 angular.module('clientApp')
-  .controller('NewProjectCtrl', function ($scope, $http, $timeout, disciplines, cities, levels, types) {
+  .controller('NewProjectCtrl', function ($scope, $http, $timeout, $modalInstance, disciplines, cities, levels, types) {
     /**Set all drop down values**/
     $scope.disciplines = disciplines;
     $scope.discipline = disciplines[0];
@@ -37,6 +37,10 @@ angular.module('clientApp')
     $scope.alertFail = {
       type: 'danger',
       msg: 'Något gick fel! Projektet blev ej inlagt.'
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
     };
 
     $scope.submit = function () {

@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3>Ansök om ny komponent</h3>
+  <h3>Lägg till uppdrag</h3>
 </div>
 
 <div class="modal-body">
@@ -17,7 +17,7 @@
 
       <div class="col-sm-9">
         <input required type="text" type="number" name="prj_number" ng-model="project.prj_number" class="form-control"
-               id="number" placeholder="Ex: Kv. 4030000">
+               id="number" placeholder="Ex: 4030000">
       </div>
     </div>
     <div class="form-group">
@@ -25,7 +25,7 @@
 
       <div class="col-sm-9">
         <input type="text" name="prj_year" ng-model="project.prj_year" class="form-control" id="year"
-               placeholder="Ex: Kv. 2010">
+               placeholder="Ex: 2010">
       </div>
     </div>
     <div class="form-group">
@@ -72,7 +72,7 @@
 
       <div class="col-sm-9">
         <input type="text" type="number" min="10" name="prj_area" ng-model="project.prj_area" class="form-control"
-               id="area" placeholder="Ex: 1">
+               id="area" placeholder="">
       </div>
     </div>
     <div class="form-group">
@@ -80,15 +80,15 @@
 
       <div class="col-sm-9">
         <input type="number" name="prj_price_offer" ng-model="project.prj_price_offer" class="form-control"
-               id="priceOffer" placeholder="Ex: 1">
+               id="priceOffer" placeholder="">
       </div>
     </div>
     <div class="form-group">
-      <label for="priceFinal" class="col-sm-3">Resultat</label>
+      <label for="priceFinal" class="col-sm-3">Resultat (slutpris)</label>
 
       <div class="col-sm-9">
         <input type="number" name="prj_price_final" ng-model="project.prj_price_final" class="form-control"
-               id="priceFinal" placeholder="Ex: 1">
+               id="priceFinal" placeholder="">
         <span ng-show="form.size.$error.integer">This is not valid integer!</span>
       </div>
     </div>

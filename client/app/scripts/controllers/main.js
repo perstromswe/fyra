@@ -3,7 +3,7 @@
 angular.module('clientApp')
   .controller('MainCtrl', function ($scope, $filter, $modal, $state, projects, Common) {
     //var projectsCopy = angular.copy(projects)
-    $scope.projects = Common.calculatePricesInProjects(projects);
+    $scope.projects = Common.calculateHoursAndPricePerSqm(projects);
 
     /**Get the oldest and newest project and attach it to the slider**/
     var years = _.pluck(projects, 'prj_year'),
@@ -50,6 +50,17 @@ angular.module('clientApp')
 
     $scope.search = '';
 
+    $scope.filterActive = function(prop){
+      var isActive = false;
+      angular.forEach($scope[prop], function (value) {
+
+        if(!value.activated){
+          isActive = true;
+        }
+      });
+      return isActive;
+    };
+
     $scope.$watch('search', function () {
       update();
     });
@@ -78,7 +89,7 @@ angular.module('clientApp')
     function update() {
       var projects = $filter('matchProjects')($scope.projects, $scope.cities, $scope.disciplines, $scope.levels, $scope.types, $scope.search, $scope.sliderYears.currentMin, $scope.sliderYears.currentMax);
       $scope.nrOfProjectsFiltred = projects.length;
-      $scope.averagePrice = Common.calculateAveragePrice(projects);
+      $scope.average = Common.calculateAveragePriceAndHours(projects);
     }
 
     /**Post a new project. Modal has it's own controller: 'NewProjectCtrl**/

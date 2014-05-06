@@ -76,7 +76,6 @@ angular.module('clientApp')
       $scope.discipline = $scope.disciplines[disciplinePosition];
     };
 
-
     $scope.startEdit = function () {
       $scope.editMode.active = true;
       $scope.project.prj_changed_by = '';
@@ -116,6 +115,7 @@ angular.module('clientApp')
     };
 
     $scope.save = function () {
+      console.log($scope.project);
       $scope.project.$save(function () {
         /**Notify the user for a few second that the post was successful**/
         $scope.requested = true;

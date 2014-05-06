@@ -33,25 +33,31 @@ angular.module('clientApp.services', ['ngResource'])
         }
         return arrayWithKey;
       },
-      calculatePricesInProjects: function (projects) {
+      calculateHoursAndPricePerSqm: function (projects) {
         var projectsWithPrice = [];
         angular.forEach(projects, function (project) {
           this.push(project);
           project.prj_price_offer_per_sqm = Math.round(project.prj_price_offer / project.prj_area);
           project.prj_price_final_per_sqm = Math.round(project.prj_price_final / project.prj_area);
+          project.prj_hours_per_sqm = Math.round((project.prj_hours / project.prj_area)*100)/100;
         }, projectsWithPrice);
         return projectsWithPrice;
       },
-      calculateAveragePrice: function (projects) {
+      calculateAveragePriceAndHours: function (projects) {
+
         var obj = {},
           offerPrice = 0,
-          finalPrice = 0;
+          finalPrice = 0,
+          hours = 0;
         angular.forEach(projects, function (project) {
           offerPrice += project.prj_price_offer_per_sqm;
           finalPrice += project.prj_price_final_per_sqm;
+          hours += project.prj_hours_per_sqm;
+
         });
         obj.averageOfferPrice = Math.round(offerPrice / projects.length);
         obj.averageFinalPrice = Math.round(finalPrice / projects.length);
+        obj.averageHours = Math.round((hours / projects.length)*100)/100;
         return obj;
       }
     };

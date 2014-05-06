@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="priceFinal" class="col-sm-3">Resultat (slutpris)</label>
+      <label for="priceFinal" class="col-sm-3">Fakturerat (slutpris)</label>
 
       <div class="col-sm-9">
         <input type="number" name="prj_price_final" ng-model="project.prj_price_final" class="form-control"
@@ -92,8 +92,17 @@
         <span ng-show="form.size.$error.integer">This is not valid integer!</span>
       </div>
     </div>
+    <div class="form-group">
+      <label for="priceFinal" class="col-sm-3">Antal fakturerade timmar</label>
+
+      <div class="col-sm-9">
+        <input type="number" name="prj_hours" ng-model="project.prj_hours" class="form-control"
+               id="hours" placeholder="">
+        <span ng-show="form.size.$error.integer">This is not valid integer!</span>
+      </div>
+    </div>
     <input type="submit" class="btn btn-block btn-success btn-lg" value="Lägg till"
-           ng-disabled="!project.prj_title || !project.prj_number || !project.prj_year || !project.prj_leader || !project.prj_area || !project.prj_price_offer || !project.prj_price_final">
+           ng-disabled="!project.prj_title || !project.prj_number || !project.prj_year || !project.prj_leader || !project.prj_area || !project.prj_price_offer || !project.prj_price_final || !project.prj_hours">
     <br>
     <alert ng-show="requested" type="alert.type">{{alert.msg}}</alert>
     <alert ng-show="requestedFail" type="alertFail.type">{{alertFail.msg}}</alert>

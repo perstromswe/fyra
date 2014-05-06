@@ -16,9 +16,23 @@ describe('MainCtrl', function() {
     $scope = $rootScope.$new();
     ctrl = $controller('MainCtrl', {
       $scope: $scope,
-      projects: [1, 2, 3]
+      projects: [1, 2, 3],
+      cities: [
+        {
+          title:'Stockholm',
+          activated: true
+        },
+        {
+          title:'Göteborg',
+          activated: false
+        }
+      ]
     });
   }));
+
+  it('should return true when one of the the filter is not activad (the filter is active)', function(){
+    //expect($scope.filterActive('cities')).toEqual(true);
+  });
 
   it('should have a list with cities', function(){
     expect($scope.cities[0].activated).toEqual(true);

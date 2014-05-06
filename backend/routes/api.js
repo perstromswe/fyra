@@ -68,7 +68,8 @@ exports.addProject = function (inputs, callback) {
       prj_level: inputs.body.prj_level.id,
       prj_area: inputs.body.prj_area,
       prj_price_offer: inputs.body.prj_price_offer,
-      prj_price_final: inputs.body.prj_price_final
+      prj_price_final: inputs.body.prj_price_final,
+      prj_hours: inputs.body.prj_hours
     });
 
   query.exec(function (err, results) {
@@ -101,6 +102,8 @@ exports.updateProject = function (inputs, callback) {
       prj_area: inputs.body.prj_area,
       prj_price_offer: inputs.body.prj_price_offer,
       prj_price_final: inputs.body.prj_price_final,
+      prj_hours: inputs.body.prj_hours,
+      prj_changed_by: inputs.body.prj_changed_by,
       prj_changed_date: new Date()
     });
 

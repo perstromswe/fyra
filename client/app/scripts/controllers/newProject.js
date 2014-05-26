@@ -9,6 +9,7 @@
 angular.module('clientApp')
   .controller('NewProjectCtrl', function ($scope, $http, $timeout, $modalInstance, disciplines, cities, levels, types) {
     /**Set all drop down values**/
+
     $scope.disciplines = disciplines;
     $scope.discipline = disciplines[0];
 
@@ -45,12 +46,7 @@ angular.module('clientApp')
 
     $scope.submit = function () {
 
-      $http({
-        method: 'POST',
-        url: '/fyra/api/project',
-        data: $.param($scope.project),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-      })
+      $http.post('/fyra/api/project', $scope.project)
         .success(function (data, status) {
           if (status === 200) {
             $scope.requested = true;

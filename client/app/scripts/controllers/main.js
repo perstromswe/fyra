@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('clientApp')
-  .controller('MainCtrl', function ($scope, $filter, $modal, $state, projects, Common) {
+  .controller('MainCtrl', function ($scope, $filter, $modal, $state, projects, Common, cities, types, disciplines, levels) {
+
+
     //var projectsCopy = angular.copy(projects)
     $scope.projects = Common.calculateHoursAndPricePerSqm(projects);
 
@@ -16,6 +18,7 @@ angular.module('clientApp')
       currentMin: oldestYear,
       currentMax: newestYear
     };
+
 
     /**Create an array with title, id and activatedProperty on all cities in projects**/
     var cityTitles = _.uniq(_.pluck(projects, 'ci_title')),
@@ -53,7 +56,6 @@ angular.module('clientApp')
     $scope.filterActive = function(prop){
       var isActive = false;
       angular.forEach($scope[prop], function (value) {
-
         if(!value.activated){
           isActive = true;
         }
@@ -98,16 +100,16 @@ angular.module('clientApp')
         templateUrl: './template/modal/newProject.html',
         resolve: {
           disciplines: function () {
-            return $scope.disciplines;
+            return disciplines;
           },
           cities: function () {
-            return $scope.cities;
+            return cities;
           },
           levels: function () {
-            return $scope.levels;
+            return levels;
           },
           types: function () {
-            return $scope.types;
+            return types;
           }
         },
         controller: 'NewProjectCtrl'

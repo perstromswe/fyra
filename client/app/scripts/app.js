@@ -23,6 +23,18 @@ angular.module('clientApp', [
         resolve: {
           projects: ['MultiProjectsLoader', function (MultiProjectsLoader) {
             return new MultiProjectsLoader();
+          }],
+          cities: ['MultiCityLoader', function (MultiCityLoader) {
+            return new MultiCityLoader();
+          }],
+          disciplines: ['MultiDisciplineLoader', function (MultiDisciplineLoader) {
+            return new MultiDisciplineLoader();
+          }],
+          levels: ['MultiLevelLoader', function (MultiLevelLoader) {
+            return new MultiLevelLoader();
+          }],
+          types: ['MultiTypeLoader', function (MultiTypeLoader) {
+            return new MultiTypeLoader();
           }]
         },
         controller: 'MainCtrl'

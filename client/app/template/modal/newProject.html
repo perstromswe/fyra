@@ -40,7 +40,7 @@
       <label for="type" class="col-sm-3">Typ av uppdrag</label>
 
       <div class="col-sm-9">
-        <select id="type" class="form-control" ng-model="project.prj_type" ng-options="t.title for t in types"></select>
+        <select id="type" class="form-control" ng-model="project.prj_type" ng-options="t.ty_title for t in types"></select>
       </div>
     </div>
     <div class="form-group">
@@ -48,7 +48,7 @@
 
       <div class="col-sm-9">
         <select id="city" class="form-control" ng-model="project.prj_city"
-                ng-options="c.title for c in cities"></select>
+                ng-options="c.ci_title for c in cities"></select>
       </div>
     </div>
     <div class="form-group">
@@ -56,7 +56,7 @@
 
       <div class="col-sm-9">
         <select id="discipline" class="form-control" name="prj_discipline" ng-model="project.prj_discipline"
-                ng-options="d.title for d in disciplines"></select>
+                ng-options="d.di_title for d in disciplines"></select>
       </div>
     </div>
     <div class="form-group">
@@ -64,7 +64,7 @@
 
       <div class="col-sm-9">
         <select id="level" class="form-control" ng-model="project.prj_level"
-                ng-options="l.title for l in levels"></select>
+                ng-options="l.le_title for l in levels"></select>
       </div>
     </div>
     <div class="form-group">

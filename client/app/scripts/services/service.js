@@ -19,7 +19,8 @@ angular.module('clientApp.services', ['ngResource'])
             activated: true
           });
         }
-        return combinedArray;
+        var sortedArray = _.sortBy(combinedArray, function(o) { return o.title });
+        return sortedArray;
       },
       addActivatedKey: function (array) {
         var arrayWithKey = [];
@@ -66,17 +67,77 @@ angular.module('clientApp.services', ['ngResource'])
   .factory('Project', function ($resource) {
     return $resource('/fyra/api/project/:prj_id', {'prj_id': '@prj_id'});
   })
-  .factory('MultiProjectsLoader', ['Project', '$q', '$stateParams',
-    function (Projects, $q) {
+  .factory('MultiProjectsLoader', function (Project, $q) {
       return function () {
         var delay = $q.defer();
-        Projects.query(function (projects) {
+        Project.query(function (projects) {
           delay.resolve(projects);
         }, function () {
-          delay.reject('Unable to fetch sizes');
+          delay.reject('Unable to fetch projects');
         });
         return delay.promise;
       };
     }
-  ]);
+  )
+  .factory('City', function ($resource) {
+    return $resource('/fyra/api/city');
+  })
+  .factory('MultiCityLoader', function (City, $q) {
+      return function () {
+        var delay = $q.defer();
+        City.query(function (cities) {
+          delay.resolve(cities);
+        }, function () {
+          delay.reject('Unable to fetch cities');
+        });
+        return delay.promise;
+      };
+    }
+  )
+  .factory('Type', function ($resource) {
+    return $resource('/fyra/api/type');
+  })
+  .factory('MultiTypeLoader', function (Type, $q) {
+      return function () {
+        var delay = $q.defer();
+        Type.query(function (types) {
+          delay.resolve(types);
+        }, function () {
+          delay.reject('Unable to fetch types');
+        });
+        return delay.promise;
+      };
+    }
+  )
+  .factory('Level', function ($resource) {
+    return $resource('/fyra/api/level');
+  })
+  .factory('MultiLevelLoader', function (Level, $q) {
+    return function () {
+      var delay = $q.defer();
+      Level.query(function (levels) {
+        delay.resolve(levels);
+      }, function () {
+        delay.reject('Unable to fetch levels');
+      });
+      return delay.promise;
+    };
+  }
+)
+  .factory('Discipline', function ($resource) {
+    return $resource('/fyra/api/discipline');
+  })
+  .factory('MultiDisciplineLoader', function (Discipline, $q) {
+    return function () {
+      var delay = $q.defer();
+      Discipline.query(function (disciplines) {
+        delay.resolve(disciplines);
+      }, function () {
+        delay.reject('Unable to fetch disciplines');
+      });
+      return delay.promise;
+    };
+  }
+);
+
 

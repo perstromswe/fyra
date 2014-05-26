@@ -26,6 +26,36 @@ describe('MainCtrl', function() {
           title:'Göteborg',
           activated: false
         }
+      ],
+      types: [
+        {
+          title:'Stockholm',
+          activated: true
+        },
+        {
+          title:'Göteborg',
+          activated: false
+        }
+      ],
+      disciplines: [
+        {
+          title:'Stockholm',
+          activated: true
+        },
+        {
+          title:'Göteborg',
+          activated: false
+        }
+      ],
+      levels: [
+        {
+          title:'Stockholm',
+          activated: true
+        },
+        {
+          title:'Göteborg',
+          activated: false
+        }
       ]
     });
   }));

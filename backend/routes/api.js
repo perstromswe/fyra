@@ -55,17 +55,17 @@ exports.allProjects = function (inputs, callback) {
  POST /api/project HTTP/1.1
  */
 exports.addProject = function (inputs, callback) {
-  console.log(inputs.body);
+
   var query = knex('project')
     .insert({
       prj_number: inputs.body.prj_number,
       prj_title: inputs.body.prj_title,
       prj_year: inputs.body.prj_year,
       prj_leader: inputs.body.prj_leader,
-      prj_type: inputs.body.prj_type.id,
-      prj_city: inputs.body.prj_city.id,
-      prj_discipline: inputs.body.prj_discipline.id,
-      prj_level: inputs.body.prj_level.id,
+      prj_type: inputs.body.prj_type.ty_id,
+      prj_city: inputs.body.prj_city.ci_id,
+      prj_discipline: inputs.body.prj_discipline.di_id,
+      prj_level: inputs.body.prj_level.le_id,
       prj_area: inputs.body.prj_area,
       prj_price_offer: inputs.body.prj_price_offer,
       prj_price_final: inputs.body.prj_price_final,
@@ -113,5 +113,86 @@ exports.updateProject = function (inputs, callback) {
       return console.error('error running query', err);
     }
     sendResponse(callback);
+  });
+};
+
+
+/*
+ GET fyra/api/city
+ */
+exports.getCities = function(req, res){
+  var query = knex('city')
+    .select();
+
+  query.exec(function(err, cities){
+    if(err){
+      var response = {
+        message: 'Something went wrong when trying to fetch cities',
+        thrownErr: err
+      };
+      throw new Error(response)
+    }
+    res.send(200, cities);
+
+  });
+};
+
+/*
+ GET fyra/api/level
+ */
+exports.getLevels = function(req, res){
+  var query = knex('level')
+    .select();
+
+  query.exec(function(err, levels){
+    if(err){
+      var response = {
+        message: 'Something went wrong when trying to fetch levels',
+        thrownErr: err
+      };
+      throw new Error(response)
+    }
+    res.send(200, levels);
+
+  });
+};
+
+/*
+ GET fyra/api/type
+ */
+exports.getTypes = function(req, res){
+  var query = knex('type')
+    .select();
+
+  query.exec(function(err, types){
+    if(err){
+      var response = {
+        message: 'Something went wrong when trying to fetch levels',
+        thrownErr: err
+      };
+      throw new Error(response)
+    }
+    res.send(200, types);
+
+  });
+};
+
+/*
+ GET fyra/api/discipline
+ */
+exports.getDisciplines = function(req, res){
+  var query = knex('discipline')
+    .select();
+
+  query.exec(function(err, disciplines){
+    if(err){
+      var response = {
+        message: 'Something went wrong when trying to fetch disciplines',
+        thrownErr: err
+      };
+      throw new Error(response)
+    }
+    res.send(200, disciplines);
+
   });
 };

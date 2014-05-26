@@ -30,6 +30,12 @@ function routesSetup(server) {
   server.get('/fyra/api/project', api.allProjects);
   server.post('/fyra/api/project', api.addProject);
   server.post('/fyra/api/project/:prj_id', api.updateProject);
+
+  server.get('/fyra/api/city', api.getCities);
+  server.get('/fyra/api/level', api.getLevels);
+  server.get('/fyra/api/discipline', api.getDisciplines);
+  server.get('/fyra/api/type', api.getTypes);
+
   server.get('*', api.notFound);
 }
 

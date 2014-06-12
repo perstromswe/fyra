@@ -39,7 +39,11 @@ describe('Routing -->', function () {
 
     it('should be possible to insert new projects', function (done) {
       postProject()
-        .expect(200, done);
+        .end(function(err, res){
+          res.status.should.equal(200);
+          res.body['prj_id'].should.exist;
+          done();
+        })
     });
 
     it('should be possible to fetch cities with /fyra/api/city', function(done){

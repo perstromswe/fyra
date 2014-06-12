@@ -168,14 +168,74 @@
             <table class="table table-hover">
               <thead>
               <tr>
-                <th>Uppdrag</th>
-                <th>Uppdragsledare</th>
-                <th>År</th>
-                <th>Stad</th>
+                <th class="col-sm-5">
+                  <ul class="list-inline">
+                    <li>
+                      <a ng-click="sort = 'prj_number'; reverse=!reverse">Uppdragsnummer</a>
+                    </li>
+                    <li>
+                      <div>
+                        <ul class="list-unstyled filterList">
+                          <li>
+                            <i  ng-class="{'fa-sort-desc orderActive': isOrderActive('prj_number', false), 'fa-sort-asc orderActive': isOrderActive('prj_number', true)}" class="fa"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </th>
+                <th class="col-sm-2">
+                  <ul class="list-inline">
+                    <li>
+                      <a ng-click="sort = 'prj_leader'; reverse=!reverse">UL</a>
+                    </li>
+                    <li>
+                      <div>
+                        <ul class="list-unstyled filterList">
+                          <li>
+                            <i ng-class="{'fa-sort-desc orderActive': isOrderActive('prj_leader', false), 'fa-sort-asc orderActive': isOrderActive('prj_leader', true)}" class="fa"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </th>
+                <th class="col-sm-2">
+                  <ul class="list-inline">
+                    <li>
+                      <a ng-click="sort = 'prj_city'; reverse=!reverse">Stad</a>
+                    </li>
+                    <li>
+                      <div>
+                        <ul class="list-unstyled filterList">
+                          <li>
+                            <i ng-class="{'fa-sort-desc orderActive': isOrderActive('prj_city', false), 'fa-sort-asc orderActive': isOrderActive('prj_city', true)}" class="fa"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </th>
+                <th  class="col-sm-2">
+                  <ul class="list-inline">
+                    <li>
+                      <a ng-click="sort = 'prj_year'; reverse=!reverse">År</a>
+                    </li>
+                    <li>
+                      <div>
+                        <ul class="list-unstyled filterList">
+                          <li>
+                            <i ng-class="{'fa-sort-desc orderActive': isOrderActive('prj_year', false), 'fa-sort-asc orderActive': isOrderActive('prj_year', true)}" class="fa"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </th>
               </tr>
               </thead>
               <tbody>
-              <tr ng-repeat="project in projects | matchProjects:cities:disciplines:levels:types:search:sliderYears.currentMin:sliderYears.currentMax"
+              <tr ng-repeat="project in projects | matchProjects:cities:disciplines:levels:types:search:sliderYears.currentMin:sliderYears.currentMax  | orderBy:sort:reverse"
                   ng-click="edit(project.prj_id)">
                 <td><a>{{project.prj_number}}: {{project.prj_title}}</a></td>
                 <td>{{project.prj_leader}}</td>

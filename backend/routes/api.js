@@ -34,6 +34,7 @@ exports.notFound = function (req, res) {
 /*
  GET /api/project/ HTTP/1.1
  */
+
 exports.allProjects = function (inputs, callback) {
   var query = knex('project')
     .join('city', 'project.prj_city', '=', 'city.ci_id')
@@ -51,11 +52,12 @@ exports.allProjects = function (inputs, callback) {
   });
 };
 
+
+
 /*
  POST /api/project HTTP/1.1
  */
 exports.addProject = function (inputs, callback) {
-
   var query = knex('project')
     .insert({
       prj_number: inputs.body.prj_number,
@@ -70,14 +72,16 @@ exports.addProject = function (inputs, callback) {
       prj_price_offer: inputs.body.prj_price_offer,
       prj_price_final: inputs.body.prj_price_final,
       prj_hours: inputs.body.prj_hours
-    });
+    })
+    .returning('prj_id');
 
   query.exec(function (err, results) {
     if (err) {
       sendResponse(callback, err, 404);
       return console.error('error running query', err);
     }
-    sendResponse(callback, results);
+    console.log(results);
+    callback.send(200, {prj_id:results[0]});
   });
 };
 
@@ -122,7 +126,8 @@ exports.updateProject = function (inputs, callback) {
  */
 exports.getCities = function(req, res){
   var query = knex('city')
-    .select();
+    .select()
+    .orderBy('ci_title', 'desc');
 
   query.exec(function(err, cities){
     if(err){
@@ -130,7 +135,7 @@ exports.getCities = function(req, res){
         message: 'Something went wrong when trying to fetch cities',
         thrownErr: err
       };
-      throw new Error(response)
+      console.error(response);
     }
     res.send(200, cities);
 
@@ -142,7 +147,8 @@ exports.getCities = function(req, res){
  */
 exports.getLevels = function(req, res){
   var query = knex('level')
-    .select();
+    .select()
+    .orderBy('le_title', 'desc');
 
   query.exec(function(err, levels){
     if(err){
@@ -162,7 +168,8 @@ exports.getLevels = function(req, res){
  */
 exports.getTypes = function(req, res){
   var query = knex('type')
-    .select();
+    .select()
+    .orderBy('ty_title', 'desc');
 
   query.exec(function(err, types){
     if(err){
@@ -182,7 +189,8 @@ exports.getTypes = function(req, res){
  */
 exports.getDisciplines = function(req, res){
   var query = knex('discipline')
-    .select();
+    .select()
+    .orderBy('di_title', 'desc');
 
   query.exec(function(err, disciplines){
     if(err){

@@ -19,7 +19,16 @@ beforeEach(function () {
 
 
 describe('NewProjectCtrl', function () {
-  var mockBackend;
+  var mockBackend,
+    modalInstance;
+
+  modalInstance = {                    // Create a mock object using spies
+    close: jasmine.createSpy('modalInstance.close'),
+    dismiss: jasmine.createSpy('modalInstance.dismiss'),
+    result: {
+      then: jasmine.createSpy('modalInstance.result.then')
+    }
+  };
   beforeEach(inject(function ($rootScope, $controller, _$httpBackend_) {
     scope = $rootScope.$new();
     mockBackend = _$httpBackend_;
@@ -29,18 +38,21 @@ describe('NewProjectCtrl', function () {
     types = [];
     ctrl = $controller('NewProjectCtrl', {
       $scope: scope,
+      $modalInstance: modalInstance,
       disciplines: disciplines,
       cities: cities,
       levels: levels,
+      projects: [{prj_id:6}, {prj_id:7}],
       types: types
     });
   }));
 
-  //it('should return status 200 when posting data', function () {
-  //  scope.submit();
-  //mockBackend.expectPOST('/api/project', {title: 'test'}).respond({id: 2});
-  //mockBackend.flush();
-  //});
+  it('should return status 200 when posting data', function () {
+    //console.log(scope.project);
+    scope.submit();
+    mockBackend.expectPOST('/fyra/api/project').respond(200,{prj_id: 2});
+    mockBackend.flush();
+  });
 
   /*
 

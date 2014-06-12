@@ -12,8 +12,10 @@ beforeEach(function() {
 });
 
 describe('MainCtrl', function() {
-  beforeEach(inject(function($rootScope, $controller) {
+  var mockBackend;
+  beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
     $scope = $rootScope.$new();
+    mockBackend= _$httpBackend_;
     ctrl = $controller('MainCtrl', {
       $scope: $scope,
       projects: [1, 2, 3],
@@ -80,7 +82,6 @@ describe('MainCtrl', function() {
   it('should have a list with types', function () {
     expect($scope.types[0].activated).toEqual(true);
   });
-
 
 });
 

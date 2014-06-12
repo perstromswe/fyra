@@ -115,7 +115,6 @@ angular.module('clientApp')
     };
 
     $scope.save = function () {
-      console.log($scope.project);
       $scope.project.$save(function () {
         /**Notify the user for a few second that the post was successful**/
         $scope.requested = true;
@@ -125,7 +124,6 @@ angular.module('clientApp')
           $scope.requested = false;
         }, 3000);
       }, function (err) {
-        console.log(err);
         $scope.requestedFail = true;
         $scope.alertFail.msg = 'Något gick fel! Projektet kunde ej sparas. Felmeddelande: ' + err.data.clientError.message;
       });

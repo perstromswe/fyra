@@ -7,7 +7,8 @@
 
 
 angular.module('clientApp')
-  .controller('NewProjectCtrl', function ($scope, $http, $timeout, $modalInstance, disciplines, cities, levels, types) {
+  .controller('NewProjectCtrl', function ($scope, $http, $timeout, $modalInstance, disciplines, cities, levels, types, projects) {
+    $scope.projects = projects;
     /**Set all drop down values**/
 
     $scope.disciplines = disciplines;

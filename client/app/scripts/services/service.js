@@ -19,7 +19,7 @@ angular.module('clientApp.services', ['ngResource'])
             activated: true
           });
         }
-        var sortedArray = _.sortBy(combinedArray, function(o) { return o.title });
+        var sortedArray = _.sortBy(combinedArray, function(o) { return o.title; });
         return sortedArray;
       },
       addActivatedKey: function (array) {

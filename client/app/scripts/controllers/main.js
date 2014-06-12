@@ -94,6 +94,13 @@ angular.module('clientApp')
       $scope.average = Common.calculateAveragePriceAndHours(projects);
     }
 
+    $scope.sort = 'prj_number';
+    $scope.reverse = false;
+
+    $scope.isOrderActive = function(sort, reverse){
+      return sort  === $scope.sort && reverse === $scope.reverse;
+    };
+
     /**Post a new project. Modal has it's own controller: 'NewProjectCtrl**/
     $scope.newProject = function () {
       $modal.open({
@@ -110,6 +117,9 @@ angular.module('clientApp')
           },
           types: function () {
             return types;
+          },
+          projects: function(){
+            return projects;
           }
         },
         controller: 'NewProjectCtrl'
